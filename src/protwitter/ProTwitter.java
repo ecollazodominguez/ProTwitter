@@ -19,17 +19,9 @@ public class ProTwitter {
 
     /**
      * @param args the command line arguments
+     * @throws twitter4j.TwitterException
      */
     public static void main(String[] args) throws TwitterException {
-        //Configuración para acceder a Twitter
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-        .setOAuthConsumerKey("*********************")
-        .setOAuthConsumerSecret("******************************************")
-        .setOAuthAccessToken("**************************************************")
-        .setOAuthAccessTokenSecret("******************************************");
-        TwitterFactory tf = new TwitterFactory(cb.build());
-        Twitter twitter = tf.getInstance();
         
         
                 Metodos obx = new Metodos();

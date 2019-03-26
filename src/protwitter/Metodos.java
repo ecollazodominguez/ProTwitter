@@ -15,6 +15,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 /**
  *
@@ -23,12 +24,28 @@ import twitter4j.TwitterFactory;
 public class Metodos {
 
     /**
+     *Configuración para acceder a Twitter
+     * @return
+     */
+    public Twitter getTwitter(){
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+        .setOAuthConsumerKey("*********************")
+        .setOAuthConsumerSecret("******************************************")
+        .setOAuthAccessToken("**************************************************")
+        .setOAuthAccessTokenSecret("******************************************");
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        Twitter twitter = tf.getInstance();
+        
+        return twitter;
+    }
+    /**
      *Envía un tweet y muestra lo enviado.
      * @throws TwitterException
      */
     public void tweet() throws TwitterException {
         String latestStatus = JOptionPane.showInputDialog(null, "Escribe el Tweet");
-        Twitter twitter = TwitterFactory.getSingleton();
+        Twitter twitter = getTwitter();
         Status status = twitter.updateStatus(latestStatus);
         JOptionPane.showMessageDialog(null,"Tweet [ " + status.getText() + " ] enviado.");
     }
@@ -39,7 +56,7 @@ public class Metodos {
      * @throws TwitterException
      */
     public void timeTable() throws TwitterException {
-        Twitter twitter = TwitterFactory.getSingleton();
+        Twitter twitter = getTwitter();
         List<Status> statuses = twitter.getHomeTimeline();
         System.out.println("Showing home timeline.");
         for (Status status : statuses) {
@@ -55,7 +72,7 @@ public class Metodos {
      * @throws TwitterException
      */
     public void searchTweet(String busqueda) throws TwitterException {
-        Twitter twitter = TwitterFactory.getSingleton();
+        Twitter twitter = getTwitter();
         Query query = new Query(busqueda);
         QueryResult result = twitter.search(query);
         for (Status status : result.getTweets()) {
@@ -71,7 +88,7 @@ public class Metodos {
      * @throws TwitterException
      */
     public void sendDM(String user, String msg) throws TwitterException {
-        Twitter sender = TwitterFactory.getSingleton();
+        Twitter sender = getTwitter();
         DirectMessage message = sender.sendDirectMessage(user, msg);
         JOptionPane.showMessageDialog(null,"Sent: " + msg + " to @" + user);
     }
