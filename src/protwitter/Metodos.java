@@ -22,12 +22,12 @@ import twitter4j.TwitterFactory;
  */
 public class Metodos {
 
-    //Envía un tweet creando un objeto twitter.
+    //Envía un tweet y muestra lo enviado.
     public void tweet() throws TwitterException {
         String latestStatus = JOptionPane.showInputDialog(null, "Escribe el Tweet");
         Twitter twitter = TwitterFactory.getSingleton();
         Status status = twitter.updateStatus(latestStatus);
-        System.out.println("Tweet [ " + status.getText() + " ] enviado.");
+        JOptionPane.showMessageDialog(null,"Tweet [ " + status.getText() + " ] enviado.");
     }
 
     //Muestra toda la timeTable como una Lista de objeto Status.
@@ -51,11 +51,11 @@ public class Metodos {
         }
     }
 
-    //Envía un DM al usuario que se indica y con el mensaje que quieras.
+    //Envía un DM al usuario que se indica y con el mensaje que quieras y muestra el mensaje enviado.
     public void sendDM(String user, String msg) throws TwitterException {
         Twitter sender = TwitterFactory.getSingleton();
         DirectMessage message = sender.sendDirectMessage(user, msg);
-        System.out.println("Sent: " + msg + " to @" + user);
+        JOptionPane.showMessageDialog(null,"Sent: " + msg + " to @" + user);
     }
 
 }
