@@ -22,7 +22,10 @@ import twitter4j.TwitterFactory;
  */
 public class Metodos {
 
-    //Envía un tweet y muestra lo enviado.
+    /**
+     *Envía un tweet y muestra lo enviado.
+     * @throws TwitterException
+     */
     public void tweet() throws TwitterException {
         String latestStatus = JOptionPane.showInputDialog(null, "Escribe el Tweet");
         Twitter twitter = TwitterFactory.getSingleton();
@@ -30,7 +33,11 @@ public class Metodos {
         JOptionPane.showMessageDialog(null,"Tweet [ " + status.getText() + " ] enviado.");
     }
 
-    //Muestra toda la timeTable como una Lista de objeto Status.
+
+    /**
+     *Muestra toda la timeTable como una Lista de objeto Status.
+     * @throws TwitterException
+     */
     public void timeTable() throws TwitterException {
         Twitter twitter = TwitterFactory.getSingleton();
         List<Status> statuses = twitter.getHomeTimeline();
@@ -41,7 +48,12 @@ public class Metodos {
         }
     }
 
-    //Busca los tweets con el String indicado en el Query y lo muestra en una lista
+
+    /**
+     *Busca los tweets con el String indicado en el Query y lo muestra en una lista
+     * @param busqueda mensaje que va a buscar en los tweets
+     * @throws TwitterException
+     */
     public void searchTweet(String busqueda) throws TwitterException {
         Twitter twitter = TwitterFactory.getSingleton();
         Query query = new Query(busqueda);
@@ -51,7 +63,13 @@ public class Metodos {
         }
     }
 
-    //Envía un DM al usuario que se indica y con el mensaje que quieras y muestra el mensaje enviado.
+
+    /**
+     *Envía un DM al usuario que se indica y con el mensaje que quieras y muestra el mensaje enviado.
+     * @param user usuario que recibirá el DM
+     * @param msg mensaje que mandarás
+     * @throws TwitterException
+     */
     public void sendDM(String user, String msg) throws TwitterException {
         Twitter sender = TwitterFactory.getSingleton();
         DirectMessage message = sender.sendDirectMessage(user, msg);
